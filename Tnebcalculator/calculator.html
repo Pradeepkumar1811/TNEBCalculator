@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNEB Calculator</title>
+    <link rel="icon" href="eb.jpg">
+    <style>
+       table{
+        border-color: blue;
+        background-color:aqua;
+        border-radius: 10px;
+       }
+       td{
+        padding: 10px;
+       }
+       
+       button:active{
+        background-color: white;
+        width:50px;
+        border-radius: 20px;
+        transition-delay: 10ms;
+       }
+  
+       button{
+        color: yellow;
+        font-size: larger;
+        background-color: green;
+        width:50px;
+        height:50px;
+        
+       }
+       input{
+        font-size: 15px;
+        text-align: center;
+       }
+       .result {
+            font-size: 30px;
+            background-color: yellow;
+            background-origin: border-box;
+            color:blue;
+            display: inline;
+            margin-top: 10px;
+            text-align: center;
+       }
+       caption{
+        font-size:30px;
+        font-weight: bold;
+        color:yellow;
+        text-align: center;
+       }
+       h2{
+        font-weight: bold;
+        color: rgb(255, 255, 0);
+       }
+       html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+       }
+       body {
+            background-image: url(eb1.jpg);
+            background-size:cover;
+            display: flex;
+            background-repeat: no-repeat;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+       }
+       .container {
+            max-width: 90%; /* Limit the width of the container */
+            padding: 20px;
+            margin: 0 auto; /* Center the container horizontally */
+            box-sizing: border-box; /* Semi-transparent white background */
+            border-radius: 10px;
+        }
+        @media only screen and (max-width: 600px) {
+            button {
+                font-size: 24px;
+                width: calc(33.33% - 10px);
+                height: 70px;
+            }
+            input {
+                font-size: 20px;
+            }
+            .result {
+                font-size: 24px;
+            }
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <center>
+    <h2>For Domestic Use</h2>
+    <table border="5">
+        <caption>TNEB Calcultor</caption>
+        <div class="rows">
+        <tr>
+            <td colspan="3">
+                <input type="text" id="units" placeholder="Enter units" readonly>
+            </td>
+        </tr>
+        
+            <tr>
+                <td><button onclick="addToInput(1)">1</button></td>
+                <td><button onclick="addToInput(2)">2</button></td>
+                <td><button onclick="addToInput(3)">3</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="addToInput(4)">4</button></td>
+                <td><button onclick="addToInput(5)">5</button></td>
+                <td><button onclick="addToInput(6)">6</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="addToInput(7)">7</button></td>
+                <td><button onclick="addToInput(8)">8</button></td>
+                <td><button onclick="addToInput(9)">9</button></td>
+            </tr>
+            <tr>
+                <td><button style='font-size:30px;' onclick="clearLastValue()">&#8701</button></td>
+                <td><button onclick="addToInput(0)">0</button></td>
+                <td><button onclick="clearInput()">C</button></td>
+            </tr>
+            <tr><td colspan="3"><button style="width: 200px; text-align: center;" onclick="calculate()">Calculate</button></td></tr>
+        </div>
+    </table>
+    <div class="result" id="result"></div>
+</center>
+    
+</div>
+    <script>
+        function addToInput(value) {
+            document.getElementById("units").value += value;
+        }
+
+        function clearInput() {
+            document.getElementById("units").value = "";
+        }
+        function clearLastValue(value){
+            var units = document.getElementById("units").value;
+            document.getElementById("units").value = units.slice(0, -1);
+        }
+
+        function calculate() {
+            // Add your calculation logic here
+            // For now, just alert the value entered
+            var units = document.getElementById("units").value;
+            var amount=0;
+            if(units<=500){
+                if(units>400 && units<=500){
+                    amount+=(units-400)*6.00;
+                    units=400;
+                }
+                if(units>200 && units<=400){
+                    amount+=(units-200)*4.50;
+                    units=200;
+                }
+                if(units>100 && units<=200){
+                    amount+=(units-100)*2.25;
+                    units=100;
+                }
+                document.getElementById("result").innerHTML = "Bill Amount = " + amount;
+            }
+            else if(units>500){
+                if(units>1000){
+                    amount+=(units-1000)*11.00;
+                    units=1000;
+                }
+                if(units>800 && units<=1000){
+                    amount+=(units-800)*10.00;
+                    units=800;
+                }
+                if(units>600 && units<=800){
+                    amount+=(units-600)*9.00;
+                    units=600;
+                }
+                if(units>500 && units<=600){
+                    amount+=(units-500)*8.00;
+                    units=500;
+                }
+                if(units>400 && units<=500){
+                    amount+=(units-400)*6.00;
+                    units=400;
+                }
+                if(units>100 && units<=400){
+                    amount+=(units-100)*4.50;
+                    units=100;
+                }
+                document.getElementById("result").innerHTML = "Bill Amount = " + amount;
+            }
+            document.getElementById("units").value = "";
+            
+        }
+    </script>
+</body>
+</html>
